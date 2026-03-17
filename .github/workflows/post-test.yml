@@ -1,0 +1,17 @@
+name: Post Test - Calculate Sum
+
+on:
+  workflow_run:
+    workflows: ["Run Tests"]
+    types: [completed]
+
+jobs:
+  calculate:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+    - name: Calculate sum
+      run: |
+        result=$((1 + 2))
+        echo "Sum of 1 + 2 = $result"
